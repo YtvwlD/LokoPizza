@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import locale
 import curses
 from time import sleep
 from mapread import mapread
@@ -14,7 +13,7 @@ class LokoPizza:
 		self.screen.refresh()
 		
 		mapread(self)
-		self.lokomotive = Lokomotive(self, code)
+		self.lokomotive = Lokomotive(self)
 		self.screen.refresh()
 		pizzanone(self)
 		
@@ -38,23 +37,21 @@ class LokoPizza:
 					if richtung != 91: #[
 						break
 		if richtung == 65: #curses.KEY_UP
-			pfeil = unichr(8593)
+			pfeil = "^"
 		elif richtung == 67: #curses.KEY_RIGHT
-			pfeil = unichr(8594)
+			pfeil = ">"
 		elif richtung == 66: #curses.KEY_DOWN
-			pfeil = unichr(8595)
+			pfeil = "v"
 		elif richtung == 68: #curses.KEY_LEFT
-			pfeil = unichr(8592)
+			pfeil = "<"
 		else:
 			return
 		for y in range(25):
 			for x in range(80):
 				if str(weiche) == self.screen.instr(y,x,1):
-					self.screen.addstr(y+1, x+1, unicode(pfeil).encode(code))
+					self.screen.addstr(y+1, x+1, pfeil)
 		self.screen.refresh()
 
 if __name__ == "__main__":
-	locale.setlocale(locale.LC_ALL, '')
-	code = locale.getpreferredencoding()
 	lokopizza = LokoPizza()
 	curses.endwin()

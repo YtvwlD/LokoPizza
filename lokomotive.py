@@ -1,6 +1,5 @@
 class Lokomotive():
-	def __init__(self, lokopizza, code):
-		self.code = code
+	def __init__(self, lokopizza):
 		self.lokopizza = lokopizza
 		self.oldchars = []
 		for y in range(25):
@@ -37,9 +36,9 @@ class Lokomotive():
 					screen.addstr(newy, newx, chars[-charidx-1])
 					recursion(newy, newx, charidx + 1)
 				except IndexError: #Ende - jetzt kommt wieder die urspruengliche Strecke
-					screen.addstr(newy, newx, self.oldchars[newy][newx].encode(self.code))
+					screen.addstr(newy, newx, self.oldchars[newy][newx])
 		recursion(self.y, self.x, 1)
-		self.oldchars[self.y][self.x] = unicode(screen.instr(self.y, self.x, 1))
+		self.oldchars[self.y][self.x] = screen.instr(self.y, self.x, 1)
 		screen.addstr(self.y, self.x, chars[-1])
 		screen.refresh()
 		screen.move(25,0)
