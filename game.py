@@ -31,9 +31,9 @@ class Game:
 					pizno = 0
 				else:
 					pizno += 10 * self.level
-				sleep(0.0025 * (100 / self.level))
+				sleep(0.003 * (100 / self.level))
 			else:
-				sleep(0.125)
+				sleep(0.25)
 	
 	def animate(self):
 		_animations = []
