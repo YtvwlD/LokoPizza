@@ -33,7 +33,7 @@ class Lokomotive():
 				rail = True
 				self.x += 1
 		elif self.screen.instr(self.y, self.x+1, 4) == "___|":
-			pass #TODO: naechstes Level!
+			self.game.lokopizza.nextLevel()
 		#normale Schienen - oder der Start
 		else:
 			for char in ["#", "^", ">", "v", "<"]:

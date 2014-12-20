@@ -15,8 +15,8 @@ class Game:
 		self.schienen = []
 	
 	def start(self):
-		#TODO: ist True wirklich richtig?
-		while (True): #unsere Hauptschleife
+		self.running = True
+		while (self.running): #unsere Hauptschleife
 			self.lesen()
 			self.lokomotive.move()
 			self.lokomotive.display()
@@ -29,6 +29,9 @@ class Game:
 			else:
 				pizno += 100
 			sleep(0.25)
+	
+	def stop(self):
+		self.running = False
 			
 	
 	def lesen(self):
