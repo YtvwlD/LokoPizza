@@ -13,9 +13,18 @@ class LokoPizza:
 		
 		mapread(self)
 		self.screen.refresh()
+		
+		while (True): #unsere Hauptschleife
+			self.lesen()
 	
 	def lesen(self):
-		weiche = int(self.screen.getkey())
+		self.screen.nodelay(1)
+		try:
+			weiche = int(self.screen.getkey())
+		except curses.error: #nichts gelesen
+			return
+		except ValueError:
+			return
 		while (True):
 			richtung = self.screen.getch()
 			if richtung != -1: #kein Zeichen
@@ -30,6 +39,8 @@ class LokoPizza:
 			pfeil = unichr(8595)
 		elif richtung == 68: #curses.KEY_LEFT
 			pfeil = unichr(8592)
+		else:
+			return
 		for y in range(25):
 			for x in range(80):
 				if str(weiche) == self.screen.instr(y,x,1):
@@ -40,6 +51,4 @@ if __name__ == "__main__":
 	locale.setlocale(locale.LC_ALL, '')
 	code = locale.getpreferredencoding()
 	lokopizza = LokoPizza()
-	lokopizza.lesen()
-	sleep(5)
 	curses.endwin()
