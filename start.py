@@ -20,6 +20,7 @@ class LokoPizza:
 		while (True): #unsere Hauptschleife
 			self.lesen()
 			self.lokomotive.move()
+			self.lokomotive.display()
 			sleep(0.25)
 	
 	def lesen(self):
