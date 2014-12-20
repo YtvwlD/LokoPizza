@@ -9,6 +9,7 @@ def gameover(game):
 	mapread(game, "gameover.txt")
 	game.lokopizza.screen.refresh()	
 	while(True):
+		game.lesen()
 		randy = random.randint(2, 22)
 		randx = random.randint(2, 78)
 		for _ in specialfx.explosion(randy, randx, game):
