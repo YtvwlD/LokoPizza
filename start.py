@@ -3,6 +3,7 @@ import locale
 import curses
 from time import sleep
 from mapread import mapread
+from pizzanone import pizzanone
 
 class LokoPizza:
 	def __init__(self):
@@ -13,6 +14,7 @@ class LokoPizza:
 		
 		mapread(self)
 		self.screen.refresh()
+		pizzanone(self)
 		
 		while (True): #unsere Hauptschleife
 			self.lesen()
