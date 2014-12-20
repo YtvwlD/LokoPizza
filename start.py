@@ -11,7 +11,7 @@ class LokoPizza:
 		self.screen.clear()
 		self.screen.refresh()
 		
-		mapread(self, "map2.txt")
+		mapread(self, "map1.txt")
 		self.lokomotive = Lokomotive(self)
 		self.screen.refresh()
 		pizzanone(self)
