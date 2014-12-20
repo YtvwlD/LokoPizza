@@ -9,8 +9,8 @@ class Lokomotive():
 			self.oldchars.append([])
 			for x in range(80):
 				self.oldchars[y].append(None)
-				if self.screen.instr(y,x,3) == "|_|": #start
-					self.x = x+2
+				if self.screen.instr(y,x,1) == "|": #start
+					self.x = x
 					self.y = y
 	
 	def move(self):
@@ -32,7 +32,7 @@ class Lokomotive():
 			if self.screen.instr(self.y, self.x+1, 1) == "#": #rechts
 				rail = True
 				self.x += 1
-		elif self.screen.instr(self.y, self.x+1, 4) == "___|":
+		elif (None, None) != self.char_which_direction(self.y, self.x, "_"):
 			self.game.lokopizza.nextLevel()
 		#normale Schienen - oder der Start
 		else:
