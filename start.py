@@ -4,6 +4,7 @@ import curses
 from time import sleep
 from mapread import mapread
 from pizzanone import pizzanone
+from lokomotive import Lokomotive
 
 class LokoPizza:
 	def __init__(self):
@@ -13,11 +14,14 @@ class LokoPizza:
 		self.screen.refresh()
 		
 		mapread(self)
+		self.lokomotive = Lokomotive(self)
 		self.screen.refresh()
 		pizzanone(self)
 		
 		while (True): #unsere Hauptschleife
 			self.lesen()
+			self.lokomotive.move()
+			sleep(0.25)
 	
 	def lesen(self):
 		self.screen.nodelay(1)
