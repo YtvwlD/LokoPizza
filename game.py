@@ -24,12 +24,14 @@ class Game:
 			for Schiene in self.schienen:
 				Schiene.zeit()
 			if self.level:
-				if pizno > (100 / self.level):
+				if pizno > 100:
 					pizzanone(self)
 					pizno = 0
 				else:
-					pizno += 25
-			sleep(0.125)
+					pizno += 10 * self.level
+				sleep(0.0025 * (100 / self.level))
+			else:
+				sleep(0.125)
 	
 	def stop(self):
 		self.running = False
