@@ -5,6 +5,7 @@ import random
 from schienen import Schiene
 
 def gameover(game):
+	game.lokopizza.screen.clear()
 	mapread(game, "gameover.txt")
 	game.lokopizza.screen.refresh()	
 	while(True):
