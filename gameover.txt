@@ -15,9 +15,9 @@
                         | |    | |  \  \/  /  |   ___|  |   __  \
                         |  \__/  |   \    /   |  |_____ |  |  \  \
                          \______/     \__/    |________||__|   \__|
-						 
-				           
-						     As always during a game:
+
+
+	                         As always during a game:
 
                             To Restart           press r
                             To go to Main Menu   press Esc
