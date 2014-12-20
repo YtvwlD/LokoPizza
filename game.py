@@ -27,7 +27,7 @@ class Game:
 				pizzanone(self)
 				pizno = 0
 			else:
-				pizno += 100
+				pizno += 25
 			sleep(0.25)
 	
 	def stop(self):
