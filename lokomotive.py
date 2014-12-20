@@ -46,7 +46,7 @@ class Lokomotive():
 					break
 		
 		if not rail: #Explosion, wenn es keine Schienen gibt
-			specialfx.explosion(self.y, self.x, self.game)
+			self.game.animations.append(specialfx.explosion(self.y, self.x, self.game))
 			gameover(self.game)
 	
 	def char_which_direction(self, y, x, char):

@@ -2,7 +2,6 @@ import random
 import curses
 import specialfx
 import schienen
-from time import sleep
 
 def pizzanone(game):
 	screen = game.lokopizza.screen
@@ -32,10 +31,10 @@ def pizzanone(game):
 				oldchar = screen.instr(fally+1, randx)
 				screen.addstr(fally+1, randx, "Q")
 				screen.refresh()
-				sleep(0.1)
+				yield None
 				fally += 1
 			
 			# Und bei fally <= randy wird die Schiene plus Pizza entfernt und special effects sollen danach in x form um die einschlagsstelle auftauchen und wieder verschwinden
 			if(fally <= randy):
-				specialfx.explosion(fally, randx, game)
+				game.animations.append(specialfx.explosion(fally, randx, game))
 				game.schienen.append(schienen.Schiene(fally, randx, game, "#"))
