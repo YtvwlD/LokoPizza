@@ -90,7 +90,7 @@ class Game:
 					except curses.error:
 						continue
 					except ValueError:
-						self.lokopizza.screen.addstr(24, 1, "That was no number. Please try again.")
+						self.lokopizza.screen.addstr(24, 1, "That was no number. Please try again. (0 to abort.)")
 						self.lokopizza.screen.refresh()
 						continue
 				self.lokopizza.loadLevel(level)
