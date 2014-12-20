@@ -12,15 +12,37 @@ class Lokomotive():
 				if self.screen.instr(y,x,3) == "|_|": #start
 					self.x = x+2
 					self.y = y
-
+	
 	def move(self):
-		newy, newx = self.char_which_direction(self.y, self.x, "#")
-		if not newy and not newx:
-			specialfx.explosion(self.y, self.x, self.lokopizza)
+		rail = False
+		#Behandlung der Weichen:
+		if self.oldchars[self.y][self.x] == "^":
+			if self.screen.instr(self.y-1, self.x, 1) == "#": #oben
+				rail = True
+				self.y -= 1
+		elif self.oldchars[self.y][self.x] == "<":
+			if self.screen.instr(self.y, self.x-1, 1) == "#": #links
+				rail = True
+				self.x -= 1
+		elif self.oldchars[self.y][self.x] == "v":
+			if self.screen.instr(self.y+1, self.x, 1) == "#": #unten
+				rail = True
+				self.y += 1
+		elif self.oldchars[self.y][self.x] == ">":
+			if self.screen.instr(self.y, self.x+1, 1) == "#": #rechts
+				rail = True
+				self.x += 1
+		#normale Schienen - oder der Start
 		else:
-			self.y = newy
-			self.x = newx
-		
+			for char in ["#", "^", ">", "v", "<"]:
+				newy, newx = self.char_which_direction(self.y, self.x, char)
+				if newy and newx: #Schienen in der Naehe
+					rail = True
+					self.y = newy
+					self.x = newx
+		if not rail: #Explosion, wenn es keine Schienen gibt
+			specialfx.explosion(self.y, self.x, self.lokopizza)
+	
 	def char_which_direction(self, y, x, char):
 		if self.screen.instr(y, x-1, 1) == char: #links
 			return (y, x-1)
@@ -34,7 +56,7 @@ class Lokomotive():
 			return (None, None)
 	
 	def display(self):
-		chars = "Lokomotive"
+		chars = "LOKOMOTIVE"
 		
 		def recursion(y, x, charidx):
 			newy, newx = self.char_which_direction(y, x, chars[-charidx])
