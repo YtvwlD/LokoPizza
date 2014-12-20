@@ -43,7 +43,7 @@ class Lokomotive():
 					self.y = newy
 					self.x = newx
 					break
-
+		
 		if not rail: #Explosion, wenn es keine Schienen gibt
 			specialfx.explosion(self.y, self.x, self.game)
 	
