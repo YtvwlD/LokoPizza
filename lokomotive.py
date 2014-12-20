@@ -1,3 +1,5 @@
+import specialfx
+
 class Lokomotive():
 	def __init__(self, lokopizza):
 		self.lokopizza = lokopizza
@@ -12,9 +14,12 @@ class Lokomotive():
 					self.y = y
 
 	def move(self):
-		self.y, self.x = self.char_which_direction(self.y, self.x, "#")
-		if not self.y and not self.x:
-			raise Exception("Explosion!")
+		newy, newx = self.char_which_direction(self.y, self.x, "#")
+		if not newy and not newx:
+			specialfx.explosion(self.y, self.x, self.lokopizza)
+		else:
+			self.y = newy
+			self.x = newx
 		
 	def char_which_direction(self, y, x, char):
 		if self.screen.instr(y, x-1, 1) == char: #links
