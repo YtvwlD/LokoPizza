@@ -4,8 +4,9 @@ import specialfx
 import schienen
 from time import sleep
 
-def pizzanone(lokopizza):
-
+def pizzanone(game):
+    screen = game.lokopizza.screen
+    
     # Mache den Cursor unsichtbar, weil sichtbar haesslich
     curses.curs_set(0)
     # Setze while schleife auf True
@@ -17,7 +18,7 @@ def pizzanone(lokopizza):
         randx = random.randint(0, 78)
 
         # Suche nach Koordinaten, wo randy und randx eine # sind
-        if lokopizza.screen.instr(randy, randx, 1) == "#":
+        if screen.instr(randy, randx, 1) == "#":
             # Wenn eins gefunden wurde, hoert die schleife auf und keeprunning wird false
             keeprunning = False
             # Damit die Pizza runterfallen kann wird fally = 0 gesetzt
@@ -27,15 +28,15 @@ def pizzanone(lokopizza):
             # Waehrend fally nicht randy ist, soll die Pizza in Richtung der Schiene fallen
             while(fally != randy):
                 if oldchar:
-                    lokopizza.screen.addstr(fally, randx, oldchar)
-                oldchar = lokopizza.screen.instr(fally+1, randx)
-                lokopizza.screen.addstr(fally+1, randx, "Q")
-                lokopizza.screen.move(24, 79)
-                lokopizza.screen.refresh()
+                    screen.addstr(fally, randx, oldchar)
+                oldchar = screen.instr(fally+1, randx)
+                screen.addstr(fally+1, randx, "Q")
+                screen.move(24, 79)
+                screen.refresh()
                 sleep(0.1)
                 fally += 1
 
             # Und bei fally <= randy wird die Schiene plus Pizza entfernt und special effects sollen danach in x form um die einschlagsstelle auftauchen und wieder verschwinden
             if(fally <= randy):
-                specialfx.explosion(fally, randx, lokopizza)
-                lokopizza.schienen.append(schienen.Schiene(fally, randx, lokopizza, "#"))
+                specialfx.explosion(fally, randx, game)
+                game.schienen.append(schienen.Schiene(fally, randx, game, "#"))

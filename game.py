@@ -1,42 +1,46 @@
-#!/usr/bin/env python
-import curses
-from time import sleep
 from mapread import mapread
 from pizzanone import pizzanone
 from lokomotive import Lokomotive
 import specialfx
-import gameover
+import curses
+from time import sleep
 
-class LokoPizza:
-	def __init__(self):
-		self.screen = curses.initscr()
-		self.screen.clear()
-		self.screen.refresh()
-		
-		mapread(self, "map1.txt")
+class Game:
+	def __init__(self, lokopizza, level):
+		self.level = level
+		self.lokopizza = lokopizza
+		mapread(self, "map{}.txt".format(level))
 		self.lokomotive = Lokomotive(self)
-		self.screen.refresh()
+		self.lokopizza.screen.refresh()
 		self.schienen = []
-		pizzanone(self)
-		
+	
+	def start(self):
+		#TODO: ist True wirklich richtig?
 		while (True): #unsere Hauptschleife
 			self.lesen()
 			self.lokomotive.move()
 			self.lokomotive.display()
+			pizno = 0
 			for Schiene in self.schienen:
 				Schiene.zeit()
+			if pizno > (100 / self.level):
+				pizzanone(self)
+				pizno = 0
+			else:
+				pizno += 100
 			sleep(0.25)
+			
 	
 	def lesen(self):
-		self.screen.nodelay(1)
+		self.lokopizza.screen.nodelay(1)
 		try:
-			weiche = int(self.screen.getkey())
+			weiche = int(self.lokopizza.screen.getkey())
 		except curses.error: #nichts gelesen
 			return
 		except ValueError:
 			return
 		while (True):
-			richtung = self.screen.getch()
+			richtung = self.lokopizza.screen.getch()
 			if richtung != -1: #kein Zeichen
 				if richtung != 27: #ESC
 					if richtung != 91: #[
@@ -53,13 +57,9 @@ class LokoPizza:
 			return
 		for y in range(25):
 			for x in range(80):
-				if str(weiche) == self.screen.instr(y,x,1):
-					if self.screen.instr(y+1, x+1, 1) in ["X", "^", ">", "v", "<"]:
-						self.screen.addstr(y+1, x+1, pfeil)
+				if str(weiche) == self.lokopizza.screen.instr(y,x,1):
+					if self.lokopizza.screen.instr(y+1, x+1, 1) in ["X", "^", ">", "v", "<"]:
+						self.lokopizza.screen.addstr(y+1, x+1, pfeil)
 					else:
 						specialfx.explosion(y+1, x+1, self)
-		self.screen.refresh()
-
-if __name__ == "__main__":
-	lokopizza = LokoPizza()
-	curses.endwin()
+		self.lokopizza.screen.refresh()

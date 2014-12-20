@@ -1,9 +1,9 @@
 import specialfx
 
 class Lokomotive():
-	def __init__(self, lokopizza):
-		self.lokopizza = lokopizza
-		self.screen = lokopizza.screen
+	def __init__(self, game):
+		self.game = game
+		self.screen = self.game.lokopizza.screen
 		self.oldchars = []
 		for y in range(25):
 			self.oldchars.append([])
@@ -45,7 +45,7 @@ class Lokomotive():
 					break
 
 		if not rail: #Explosion, wenn es keine Schienen gibt
-			specialfx.explosion(self.y, self.x, self.lokopizza)
+			specialfx.explosion(self.y, self.x, self.game)
 	
 	def char_which_direction(self, y, x, char):
 		if self.screen.instr(y, x-1, 1) == char: #links
