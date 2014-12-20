@@ -16,11 +16,11 @@ class Game:
 	
 	def start(self):
 		self.running = True
+		pizno = 0
 		while (self.running): #unsere Hauptschleife
 			self.lesen()
 			self.lokomotive.move()
 			self.lokomotive.display()
-			pizno = 0
 			for Schiene in self.schienen:
 				Schiene.zeit()
 			if pizno > (100 / self.level):
