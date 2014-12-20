@@ -14,7 +14,7 @@ class LokoPizza:
 		self.screen.refresh()
 		
 		mapread(self)
-		self.lokomotive = Lokomotive(self)
+		self.lokomotive = Lokomotive(self, code)
 		self.screen.refresh()
 		pizzanone(self)
 		
