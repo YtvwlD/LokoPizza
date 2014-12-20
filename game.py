@@ -13,11 +13,13 @@ class Game:
 		self.lokomotive = Lokomotive(self)
 		self.lokopizza.screen.refresh()
 		self.schienen = []
+		self.animations = []
 	
 	def start(self):
 		self.running = True
 		pizno = 0
 		while (self.running): #unsere Hauptschleife
+			self.animate()
 			self.lesen()
 			self.lokomotive.move()
 			self.lokomotive.display()
@@ -25,7 +27,7 @@ class Game:
 				Schiene.zeit()
 			if self.level:
 				if pizno > 100:
-					pizzanone(self)
+					self.animations.append(pizzanone(self))
 					pizno = 0
 				else:
 					pizno += 10 * self.level
@@ -33,6 +35,17 @@ class Game:
 			else:
 				sleep(0.125)
 	
+	def animate(self):
+		_animations = []
+		for generator in self.animations:
+			try:
+				next(generator)
+			except StopIteration:
+				pass
+			else:
+				_animations.append(generator)
+		self.animations = _animations
+
 	def stop(self):
 		self.running = False
 			
@@ -68,7 +81,7 @@ class Game:
 						if self.lokopizza.screen.instr(y+1, x+1, 1) in ["X", "^", ">", "v", "<"]:
 							self.lokopizza.screen.addstr(y+1, x+1, pfeil)
 						else:
-							specialfx.explosion(y+1, x+1, self)
+							self.animations.append(specialfx.explosion(y+1, x+1, self))
 		else:
 			try:
 				wahl = self.lokopizza.screen.getkey()
