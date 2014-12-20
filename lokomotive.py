@@ -74,4 +74,3 @@ class Lokomotive():
 		self.oldchars[self.y][self.x] = self.screen.instr(self.y, self.x, 1)
 		self.screen.addstr(self.y, self.x, chars[-1])
 		self.screen.refresh()
-		self.screen.move(25,0)

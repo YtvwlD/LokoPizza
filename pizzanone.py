@@ -31,7 +31,6 @@ def pizzanone(game):
                     screen.addstr(fally, randx, oldchar)
                 oldchar = screen.instr(fally+1, randx)
                 screen.addstr(fally+1, randx, "Q")
-                screen.move(24, 79)
                 screen.refresh()
                 sleep(0.1)
                 fally += 1

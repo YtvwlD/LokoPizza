@@ -9,7 +9,7 @@ class LokoPizza:
 		self.screen = curses.initscr()
 		self.screen.clear()
 		self.screen.refresh()
-		
+		curses.noecho()
 		#TODO: Menue
 		self.game = Game(self, 1)
 		self.game.start()
