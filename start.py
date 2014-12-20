@@ -5,6 +5,7 @@ from mapread import mapread
 from pizzanone import pizzanone
 from lokomotive import Lokomotive
 import specialfx
+import gameover
 
 class LokoPizza:
 	def __init__(self):

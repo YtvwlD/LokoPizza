@@ -17,6 +17,6 @@
  |_|#######################################################################__
 
                      To Start      Press "s"
-                     To Options    Press "o"
+                     To Tutorial   Press "o"
                      Level Select  Press "l"
                      To Exit       Press "e"
