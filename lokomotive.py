@@ -1,7 +1,7 @@
 import specialfx
 from gameover import gameover
 
-class Lokomotive():
+class Lokomotive:
 	def __init__(self, game):
 		self.game = game
 		self.screen = self.game.lokopizza.screen

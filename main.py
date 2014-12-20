@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 import curses
 import sys
-from time import sleep
-import gameover
 from game import Game
-from mapread import mapread
 
 class LokoPizza:
 	def __init__(self):

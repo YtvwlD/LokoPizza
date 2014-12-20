@@ -1,6 +1,3 @@
-from time import sleep
-
-
 def explosion(y, x, game):
 	screen = game.lokopizza.screen
 	screen.addstr(y, x, " ")

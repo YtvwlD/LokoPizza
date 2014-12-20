@@ -1,5 +1,3 @@
-from time import sleep
-
 class Schiene:
 	
 	def __init__(self, y, x, game, character):

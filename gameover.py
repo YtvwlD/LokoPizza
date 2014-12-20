@@ -2,7 +2,6 @@ from mapread import mapread
 from time import sleep
 import specialfx
 import random
-from threading import Thread
 from schienen import Schiene
 
 def gameover(game):
