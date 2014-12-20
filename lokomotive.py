@@ -1,4 +1,5 @@
 import specialfx
+from gameover import gameover
 
 class Lokomotive():
 	def __init__(self, game):
@@ -46,6 +47,7 @@ class Lokomotive():
 		
 		if not rail: #Explosion, wenn es keine Schienen gibt
 			specialfx.explosion(self.y, self.x, self.game)
+			gameover(self.game)
 	
 	def char_which_direction(self, y, x, char):
 		if self.screen.instr(y, x-1, 1) == char: #links
