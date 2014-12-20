@@ -11,7 +11,7 @@ def gameover(game):
 	while(True):
 		randy = random.randint(2, 22)
 		randx = random.randint(2, 78)
-		for _ in specialfx.explosion(randy, randx, lokopizza):
+		for _ in specialfx.explosion(randy, randx, game):
 			sleep(0.1)
 		char = game.lokopizza.screen.instr(randy, randx, 1)
 		game.schienen.append(Schiene(randy, randx, game, char))
