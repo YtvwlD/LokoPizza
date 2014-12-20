@@ -1,5 +1,5 @@
-def mapread(lokopizza):
-    map = open("map1.txt", "r")
+def mapread(lokopizza, filename):
+    map = open(filename, "r")
 
     tmpstr = map.read()
     tmparray = tmpstr.splitlines()

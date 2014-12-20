@@ -9,10 +9,9 @@ class LokoPizza:
 	def __init__(self):
 		self.screen = curses.initscr()
 		self.screen.clear()
-		#self.screen.border(0)
 		self.screen.refresh()
 		
-		mapread(self)
+		mapread(self, "map2.txt")
 		self.lokomotive = Lokomotive(self)
 		self.screen.refresh()
 		pizzanone(self)
