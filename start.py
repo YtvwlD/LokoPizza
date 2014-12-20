@@ -4,6 +4,7 @@ from time import sleep
 from mapread import mapread
 from pizzanone import pizzanone
 from lokomotive import Lokomotive
+import specialfx
 
 class LokoPizza:
 	def __init__(self):
@@ -52,7 +53,10 @@ class LokoPizza:
 		for y in range(25):
 			for x in range(80):
 				if str(weiche) == self.screen.instr(y,x,1):
-					self.screen.addstr(y+1, x+1, pfeil)
+					if self.screen.instr(y+1, x+1, 1) in ["X", "^", ">", "v", "<"]:
+						self.screen.addstr(y+1, x+1, pfeil)
+					else:
+						specialfx.explosion(y+1, x+1, self)
 		self.screen.refresh()
 
 if __name__ == "__main__":
