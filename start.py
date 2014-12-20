@@ -14,12 +14,15 @@ class LokoPizza:
 		mapread(self, "map1.txt")
 		self.lokomotive = Lokomotive(self)
 		self.screen.refresh()
+		self.schienen = []
 		pizzanone(self)
 		
 		while (True): #unsere Hauptschleife
 			self.lesen()
 			self.lokomotive.move()
 			self.lokomotive.display()
+			for Schiene in self.schienen:
+				Schiene.zeit()
 			sleep(0.25)
 	
 	def lesen(self):

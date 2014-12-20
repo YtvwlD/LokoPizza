@@ -1,6 +1,7 @@
 import random
 import curses
 import specialfx
+import schienen
 from time import sleep
 
 def pizzanone(lokopizza):
@@ -37,3 +38,4 @@ def pizzanone(lokopizza):
             # Und bei fally <= randy wird die Schiene plus Pizza entfernt und special effects sollen danach in x form um die einschlagsstelle auftauchen und wieder verschwinden
             if(fally <= randy):
                 specialfx.explosion(fally, randx, lokopizza)
+                lokopizza.schienen.append(schienen.Schiene(fally, randx, lokopizza))
