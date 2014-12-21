@@ -118,13 +118,11 @@ class Game:
 			elif wahl == "o":
 				self.lokopizza.mapstr = "tut{}.txt"
 				self.lokopizza.loadLevel(1)
-				#self.lokopizza.screen.addstr(24, 1, "This is currently not possible yet. Sorry.")
-				#TODO: Tutorial
 			elif wahl == "l":
 				self.lokopizza.screen.addstr(24, 1, "Please type your level number. (0 to abort.)")
 				self.lokopizza.screen.clrtoeol()
 				self.lokopizza.screen.refresh()
-				while(True):
+				while True:
 					try:
 						level = int(self.lokopizza.screen.getkey())
 						break
