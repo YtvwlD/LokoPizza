@@ -31,6 +31,7 @@ class Game:
 	def start(self):
 		if self.level != 0:
 			self.finalcountdown()
+		self.lokopizza.music.play("train.wav")
 		self.running = True
 		pizno = 0
 		while (self.running): #unsere Hauptschleife
