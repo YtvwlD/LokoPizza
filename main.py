@@ -2,14 +2,16 @@
 import curses
 import sys
 from game import Game
-from subprocess import Popen, PIPE
+from music import Music
+
 
 class LokoPizza:
 	def __init__(self):
-		self.pa = Popen(["pacat", "--latency-msec=1", "--volume=32000", "--client=LokoPizza"], stdin=PIPE, stdout=None, stderr=None)
 		self.screen = curses.initscr()
 		self.screen.clear()
 		self.screen.refresh()
+		self.music = Music(self)
+		self.music.start()
 		curses.noecho()
 		self.game = Game(self, 0)
 		self.game.start()
@@ -27,6 +29,7 @@ class LokoPizza:
 		self.game.start()
 	
 	def quit(self):
+		self.music.keeprunning = False
 		curses.endwin()
 		sys.exit(0)
 

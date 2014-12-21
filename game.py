@@ -4,7 +4,7 @@ from lokomotive import Lokomotive
 import specialfx
 import curses
 from time import sleep
-from wave import open as waveOpen
+
 
 class Game:
 	def __init__(self, lokopizza, level):
@@ -13,9 +13,6 @@ class Game:
 		mapread(self, "map{}.txt".format(level))
 		self.lokomotive = Lokomotive(self)
 		self.lokopizza.screen.refresh()
-		wave = waveOpen("NootNoot.wav", "rb")
-		lokopizza.pa.stdin.write(wave.readframes(1000000000000000))
-		lokopizza.pa.stdin.flush()
 		self.schienen = []
 		self.animations = []
 	
