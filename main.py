@@ -10,7 +10,7 @@ class LokoPizza:
 		self.screen = curses.initscr()
 		self.screen.clear()
 		self.screen.refresh()
-		self.music = Music(self)
+		self.music = Music()
 		self.music.start()
 		curses.noecho()
 		self.game = Game(self, 0)
