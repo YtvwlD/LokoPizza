@@ -1,3 +1,4 @@
+from random import choice
 import specialfx
 from gameover import gameover
 
@@ -50,16 +51,19 @@ class Lokomotive:
 			gameover(self.game)
 	
 	def char_which_direction(self, y, x, char):
+		possibilities = []
 		if self.screen.instr(y, x-1, 1) == char: #links
-			return (y, x-1)
-		elif self.screen.instr(y-1, x, 1) == char: #oben
-			return (y-1, x)
-		elif self.screen.instr(y, x+1, 1) == char: #rechts
-			return (y, x+1)
-		elif self.screen.instr(y+1, x, 1) == char: #unten
-			return (y+1, x)
-		else:
+			possibilities.append((y, x-1))
+		if self.screen.instr(y-1, x, 1) == char: #oben
+			possibilities.append((y-1, x))
+		if self.screen.instr(y, x+1, 1) == char: #rechts
+			possibilities.append((y, x+1))
+		if self.screen.instr(y+1, x, 1) == char: #unten
+			possibilities.append((y+1, x))
+		if len(possibilities) == 0:
 			return (None, None)
+		else:
+			return (choice(possibilities))
 	
 	def display(self):
 		chars = "LOKOMOTIVE"
