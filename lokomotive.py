@@ -67,6 +67,7 @@ class Lokomotive:
 	
 	def display(self):
 		chars = "LOKOMOTIVE"
+		self.chars = chars
 		
 		def recursion(y, x, charidx):
 			newy, newx = self.char_which_direction(y, x, chars[-charidx])

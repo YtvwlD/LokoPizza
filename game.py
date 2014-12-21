@@ -30,8 +30,8 @@ class Game:
 					self.animations.append(pizzanone(self))
 					pizno = 0
 				else:
-					pizno += 10 * self.level
-				sleep(0.003 * (100 / self.level))
+					pizno += 7 * self.level
+				sleep(0.002 * (100 / self.level))
 			else:
 				sleep(0.25)
 	
