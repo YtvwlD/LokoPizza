@@ -16,7 +16,7 @@
                                                                          
  |#######################################################################_
 
-                     To Start      Press "s"
-                     To Tutorial   Press "o"
-                     Level Select  Press "l"
-                     To Exit       Press "e" (or "q")
+                   To Start         Press "Space"
+                   To Tutorial      Press "o"
+                   Level Select     Press "l"
+                   Quit to Desktop  Press "q"

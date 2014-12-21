@@ -19,7 +19,6 @@ def pizzanone(game):
 		# Suche nach Koordinaten, wo randy und randx eine # sind
 		if screen.instr(randy, randx, 1) == "#":
 			screen.move(24, 30)
-			print ("Angebliches Ziel: {} {}".format(randy, randx))
 			def suche(newy, newx):
 				ergebnisgefunden = False
 				searchx = newx

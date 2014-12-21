@@ -11,12 +11,26 @@ class Game:
 		self.level = level
 		self.lokopizza = lokopizza
 		mapread(self, "map{}.txt".format(level))
+		self.lokopizza.screen.refresh()
 		self.lokomotive = Lokomotive(self)
 		self.lokopizza.screen.refresh()
 		self.schienen = []
 		self.animations = []
-	
+
+	def finalcountdown(self):
+		self.lokopizza.screen.addstr(24, 20, "Press 'Space' to begin! (Ingame: 'q' to quit to Menu)")
+		begin = "miau"
+		while begin != " ":
+			try:
+				begin = self.lokopizza.screen.getkey()
+			except curses.error: #nichts gelesen
+				pass
+		self.lokopizza.screen.move(24, 1)
+		self.lokopizza.screen.clrtoeol()
+
 	def start(self):
+		if self.level != 0:
+			self.finalcountdown()
 		self.running = True
 		pizno = 0
 		while (self.running): #unsere Hauptschleife
@@ -32,9 +46,7 @@ class Game:
 					pizno = 0
 				else:
 					pizno += 5 * self.level
-				sleep(0.002 * (100 / self.level))
-			else:
-				sleep(0.25)
+			sleep(0.2)
 	
 	def animate(self):
 		_animations = []
@@ -91,14 +103,14 @@ class Game:
 			except ValueError:
 				if res == "r": #restart
 					self.lokopizza.loadLevel(self.level)
-				elif res == "\x1b": #ESC
+				elif res == "q": #quit
 					self.lokopizza.loadLevel(0)
 		else:
 			try:
 				wahl = self.lokopizza.screen.getkey()
 			except curses.error: #nichts gelesen
 				return
-			if wahl == "s":
+			if wahl == " ":
 				self.lokopizza.loadLevel(1)
 			elif wahl == "o":
 				self.lokopizza.screen.addstr(24, 1, "This is currently not possible yet. Sorry.")
@@ -118,7 +130,7 @@ class Game:
 						self.lokopizza.screen.refresh()
 						continue
 				self.lokopizza.loadLevel(level)
-			elif wahl == "e" or wahl == "q":
+			elif wahl == "q":
 				self.lokopizza.quit()
 			else:
 				self.lokopizza.screen.addstr(24, 1, "Please try again.")
