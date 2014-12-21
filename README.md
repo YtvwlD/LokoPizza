@@ -10,7 +10,7 @@ Dies ist ein Projekt, das im Rahmen des [GameJam(0)](https://wiki.chaosdorf.de/G
 
 Ausführen: `python main.py`
 
-**Screenshot:**
+###Screenshot###
 
 
 		 _     __   _  _   __   _    _   __   _____  _  _     _  ___
@@ -35,3 +35,9 @@ Ausführen: `python main.py`
 						 Level Select  Press "l"
 						 To Exit       Press "e" (or "q")
 
+
+
+###Lizenzen###
+Dieses Spiel steht unter der GPL v3 (siehe dazu die README.md).
+Die Hintergrundmusik ist eine bearbeitete Version von "Mouth Money" von [Professor Kliq](http://www.professorkliq.com/). Sie steht unter [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/deed.de).
+Die Explosion ist eine bearbeitete Version des Sounds "Explosion" von [http://www.freesfx.co.uk/](http://www.freesfx.co.uk/soundeffects/explosions/).
