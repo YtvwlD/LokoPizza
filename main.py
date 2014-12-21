@@ -12,6 +12,7 @@ class LokoPizza:
 		self.screen.refresh()
 		self.music = Music()
 		self.music.start()
+		self.mapstr = "map{}.txt"
 		curses.noecho()
 		self.game = Game(self, 0)
 		self.game.start()
@@ -25,8 +26,12 @@ class LokoPizza:
 	def loadLevel(self, level):
 		self.screen.clear()
 		self.game.stop()
-		self.game = Game(self, level)
-		self.game.start()
+		try:
+			self.game = Game(self, level)
+			self.game.start()
+		except IOError:
+			self.mapstr = "map{}.txt"
+			self.loadLevel(0)
 	
 	def quit(self):
 		self.music.keeprunning = False

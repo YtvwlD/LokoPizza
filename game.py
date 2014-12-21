@@ -10,7 +10,7 @@ class Game:
 	def __init__(self, lokopizza, level):
 		self.level = level
 		self.lokopizza = lokopizza
-		mapread(self, "map{}.txt".format(level))
+		mapread(self, self.lokopizza.mapstr.format(level))
 		self.lokopizza.screen.refresh()
 		self.lokomotive = Lokomotive(self)
 		self.lokopizza.screen.refresh()
@@ -40,12 +40,13 @@ class Game:
 			self.lokomotive.display()
 			for Schiene in self.schienen:
 				Schiene.zeit()
-			if self.level:
-				if pizno > 100:
-					self.animations.append(pizzanone(self))
-					pizno = 0
-				else:
-					pizno += 5 * self.level
+			if not(self.lokopizza.mapstr == "tut{}.txt" and self.level in [1, 2]):
+				if self.level:
+					if pizno > 100:
+						self.animations.append(pizzanone(self))
+						pizno = 0
+					else:
+						pizno += 5 * self.level
 			sleep(0.2)
 	
 	def animate(self):
@@ -111,9 +112,12 @@ class Game:
 			except curses.error: #nichts gelesen
 				return
 			if wahl == " ":
+				self.lokopizza.mapstr = "map{}.txt"
 				self.lokopizza.loadLevel(1)
 			elif wahl == "o":
-				self.lokopizza.screen.addstr(24, 1, "This is currently not possible yet. Sorry.")
+				self.lokopizza.mapstr = "tut{}.txt"
+				self.lokopizza.loadLevel(1)
+				#self.lokopizza.screen.addstr(24, 1, "This is currently not possible yet. Sorry.")
 				#TODO: Tutorial
 			elif wahl == "l":
 				self.lokopizza.screen.addstr(24, 1, "Please type your level number. (0 to abort.)")
