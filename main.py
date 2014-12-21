@@ -2,9 +2,11 @@
 import curses
 import sys
 from game import Game
+from subprocess import Popen, PIPE
 
 class LokoPizza:
 	def __init__(self):
+		self.pa = Popen(["pacat", "--latency-msec=1", "--volume=32000", "--client=LokoPizza"], stdin=PIPE, stdout=None, stderr=None)
 		self.screen = curses.initscr()
 		self.screen.clear()
 		self.screen.refresh()
