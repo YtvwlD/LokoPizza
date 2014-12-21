@@ -7,7 +7,7 @@ class Music(Thread):
 	def __init__(self):
 		Thread.__init__(self)
 		self.scheduled = []
-		self.pa = Popen(["pacat", "--latency-msec=200", "--volume=32000", "--client=LokoPizza"], stdin=PIPE, stdout=None, stderr=None)
+		self.pa = Popen(["pacat", "--latency-msec=200", "--volume=60000", "--client=LokoPizza"], stdin=PIPE, stdout=None, stderr=None)
 	
 	def run(self):
 		wave = waveOpen("bgm_mouthmoney.wav", "rb")
