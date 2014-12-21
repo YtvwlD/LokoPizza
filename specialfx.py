@@ -1,4 +1,5 @@
 def explosion(y, x, game):
+	game.lokopizza.music.play("explosion.wav")
 	screen = game.lokopizza.screen
 	screen.addstr(y, x, " ")
 	screen.refresh()
