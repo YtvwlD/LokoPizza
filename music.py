@@ -15,25 +15,32 @@ class Music(Thread):
 			wave = waveOpen("bgm_mouthmoney.wav", "rb")
 			self.keeprunning = True
 			while(self.keeprunning):
-				if self.scheduled and self.what != "bgm":
-					read0 = wave.readframes(4)
-					scheduled = self.scheduled
-					read1 = scheduled.readframes(4)
-					if not read1:
-						self.scheduled = None
+				reses = []
+				for _ in range(128):
+					if self.scheduled and self.what != "bgm":
+						read0 = wave.readframes(4)
+						scheduled = self.scheduled
+						read1 = scheduled.readframes(4)
+						if not read1:
+							self.scheduled = None
+							read1 = None
+					else:
+						read0 = wave.readframes(256)
 						read1 = None
-				else:
-					read0 = wave.readframes(256)
-					read1 = None
-				if not read0:
-					wave.rewind()
-					continue
-				try:
-					res = add(read0, read1, 4)
-				except:
-					res = read0
-				if res:
+					if not read0:
+						wave.rewind()
+					try:
+						res = add(read0, read1, 4)
+					except:
+						res = read0
+					if res:
+						reses.append(res)
+				if reses:
+					res = "".join(reses)
 					self.pa.stdin.write(res)
+	
+	def reset(self):
+		self.wave = None
 	
 	def play(self, filename):
 		wave = waveOpen(filename, "rb")

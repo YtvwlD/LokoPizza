@@ -29,6 +29,7 @@ class LokoPizza:
 	
 	def loadLevel(self, level):
 		self.screen.clear()
+		self.music.reset()
 		self.game.stop()
 		try:
 			self.game = Game(self, level)
