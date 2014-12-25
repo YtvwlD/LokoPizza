@@ -4,34 +4,46 @@ from audioop import add
 from subprocess import Popen, PIPE
 
 class Music(Thread):
-	def __init__(self):
+	def __init__(self, what):
+		self.what = what
 		Thread.__init__(self)
 		self.scheduled = None
-		self.pa = Popen(["pacat", "--latency-msec=200", "--volume=60000", "--client=LokoPizza"], stdin=PIPE, stdout=None, stderr=None)
+		self.pa = Popen(["pacat", "--latency-msec=1000", "--volume=60000", "--client=LokoPizza"], stdin=PIPE, stdout=None, stderr=None)
 	
 	def run(self):
-		wave = waveOpen("bgm_mouthmoney.wav", "rb")
-		self.keeprunning = True
-		while(self.keeprunning):
-			read0 = wave.readframes(4)
-			if not read0:
-				wave.rewind()
-				read0 = wave.readframes(4)
-			if self.scheduled:
-				scheduled = self.scheduled
-				read1 = scheduled.readframes(4)
-				if not read1:
-					self.scheduled = None
+		if self.what != "None":
+			wave = waveOpen("bgm_mouthmoney.wav", "rb")
+			self.keeprunning = True
+			while(self.keeprunning):
+				if self.scheduled and self.what != "bgm":
+					read0 = wave.readframes(4)
+					scheduled = self.scheduled
+					read1 = scheduled.readframes(4)
+					if not read1:
+						self.scheduled = None
+						read1 = None
+				else:
+					read0 = wave.readframes(256)
 					read1 = None
-			else:
-				read1 = None
-			try:
-				res = add(read0, read1, 4)
-			except:
-				res = read0
-			if res:
-				self.pa.stdin.write(res)
+				if not read0:
+					wave.rewind()
+					continue
+				try:
+					res = add(read0, read1, 4)
+				except:
+					res = read0
+				if res:
+					self.pa.stdin.write(res)
 	
 	def play(self, filename):
 		wave = waveOpen(filename, "rb")
 		self.scheduled = wave
+	
+	def explosion(self):
+		self.play("explosion.wav")
+	
+	def train(self):
+		if self.what == "train":
+			self.play("train.wav")
+		elif self.what == "NootNoot":
+			self.play("NootNoot.wav")
