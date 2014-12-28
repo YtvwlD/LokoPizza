@@ -12,39 +12,40 @@ class Music(Thread):
 	
 	def run(self):
 		if self.what != "None":
-			wave = waveOpen("bgm_mouthmoney.wav", "rb")
+			bgm = waveOpen("bgm_mouthmoney.wav", "rb")
 			self.keeprunning = True
+			reses = []
 			while(self.keeprunning):
-				reses = []
-				for _ in range(128):
-					if self.scheduled and self.what != "bgm":
-						read0 = wave.readframes(4)
-						scheduled = self.scheduled
-						read1 = scheduled.readframes(4)
-						if not read1:
-							self.scheduled = None
-							read1 = None
-					else:
-						read0 = wave.readframes(256)
-						read1 = None
+				if len(reses) >= 128: #TODO
+					#Abspielen
+					self.pa.stdin.write("".join(reses))
+					reses = []
+				if self.scheduled and self.what != "bgm":
+					read0 = bgm.readframes(4)
 					if not read0:
-						wave.rewind()
+						bgm.rewind()
+						continue
+					read1 = self.scheduled.readframes(4)
+					if not read1:
+						self.scheduled = None
+						reses.append(read0)
+						continue
 					try:
-						res = add(read0, read1, 4)
+						reses.append(add(read0, read1, 4))
 					except:
-						res = read0
-					if res:
-						reses.append(res)
-				if reses:
-					res = "".join(reses)
-					self.pa.stdin.write(res)
+						pass #really?
+				else:
+					read = bgm.readframes(256)
+					if not read:
+						bgm.rewind()
+						continue
+					reses.append(read)
 	
 	def reset(self):
-		self.wave = None
+		self.scheduled = None
 	
 	def play(self, filename):
-		wave = waveOpen(filename, "rb")
-		self.scheduled = wave
+		self.scheduled = waveOpen(filename, "rb")
 	
 	def explosion(self):
 		self.play("explosion.wav")
