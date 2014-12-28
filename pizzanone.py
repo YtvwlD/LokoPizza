@@ -11,7 +11,8 @@ def pizzanone(game):
 	# Setze while schleife auf True
 	keeprunning = True
 	
-	# Hier faengt die while an, in der die pizza nach unten geflogen kommt
+	# Hier faengt die while an,
+	# in der die pizza nach unten geflogen kommt
 	while(keeprunning):
 		randy = random.randint(0, 22)
 		randx = random.randint(0, 78)
@@ -66,13 +67,15 @@ def pizzanone(game):
 					#	return False
 
 			if suche(randy, randx):
-				# Wenn eins gefunden wurde, hoert die schleife auf und keeprunning wird false
+				# Wenn eins gefunden wurde,
+				# hoert die schleife auf und keeprunning wird false
 				keeprunning = False
 				# Damit die Pizza runterfallen kann wird fally = 0 gesetzt
 				fally = 0
 				oldchar = None
 
-				# Waehrend fally nicht randy ist, soll die Pizza in Richtung der Schiene fallen
+				# Waehrend fally nicht randy ist,
+				# soll die Pizza in Richtung der Schiene fallen
 				while(fally != randy):
 					if oldchar:
 						screen.addstr(fally, randx, oldchar)
@@ -82,7 +85,9 @@ def pizzanone(game):
 					yield None
 					fally += 1
 
-				# Und bei fally <= randy wird die Schiene plus Pizza entfernt und special effects sollen danach in x form um die einschlagsstelle auftauchen und wieder verschwinden
+				# Und bei fally <= randy wird die Schiene plus Pizza entfernt
+				# und special effects sollen danach in x form um die einschlagsstelle
+				# auftauchen und wieder verschwinden
 				if(fally <= randy):
 					game.animations.append(specialfx.explosion(fally, randx, game))
 					game.schienen.append(schienen.Schiene(fally, randx, game, "#"))
