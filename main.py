@@ -11,10 +11,10 @@ class LokoPizza:
 			print ("Please select the music to play via sys.arvg[1].")
 			print ("None, bgm, train or NootNoot.")
 			sys.exit(1)
+		self.music = Music(sys.argv[1])
 		self.screen = curses.initscr()
 		self.screen.clear()
 		self.screen.refresh()
-		self.music = Music(sys.argv[1])
 		self.music.start()
 		self.mapstr = "map{}.txt"
 		curses.noecho()
