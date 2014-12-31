@@ -39,8 +39,8 @@ class Game:
 			self.lesen()
 			self.lokomotive.move()
 			self.lokomotive.display()
-			for Schiene in self.schienen:
-				Schiene.zeit()
+			for schiene in self.schienen:
+				schiene.zeit()
 			if not(self.lokopizza.mapstr == "tut{}.txt" and self.level in [1, 2]):
 				if self.level:
 					if pizno > 100:
@@ -63,7 +63,6 @@ class Game:
 
 	def stop(self):
 		self.running = False
-			
 	
 	def lesen(self):
 		self.lokopizza.screen.nodelay(1)
@@ -78,10 +77,8 @@ class Game:
 							self.lokopizza.screen.addstr(y+1, x+1, self.lokopizza.screen.instr(y+1, x+1, 1),  curses.A_REVERSE)
 							while (True):
 								richtung = self.lokopizza.screen.getch()
-								if richtung != -1: #kein Zeichen
-									if richtung != 27: #ESC
-										if richtung != 91: #[
-											break
+								if richtung not in [-1, 27, 91]: #kein Zeichen, ESC, [
+									break
 							if richtung == 65: #curses.KEY_UP
 								pfeil = "^"
 							elif richtung == 67: #curses.KEY_RIGHT
