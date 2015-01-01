@@ -21,11 +21,12 @@ class Music(Thread):
 					self.pa.stdin.write("".join(reses))
 					reses = []
 				if self.scheduled and self.what != "bgm":
+					scheduled = self.scheduled
 					read0 = bgm.readframes(4)
 					if not read0:
 						bgm.rewind()
 						continue
-					read1 = self.scheduled.readframes(4)
+					read1 = scheduled.readframes(4)
 					if not read1:
 						self.scheduled = None
 						reses.append(read0)
