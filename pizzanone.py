@@ -21,51 +21,52 @@ def pizzanone(game):
 		if screen.instr(randy, randx, 1) == "#":
 			screen.move(24, 30)
 			def suche(newy, newx):
-				ergebnisgefunden = False
+				ergebnisgefunden = []
 				searchx = newx
 				searchy = newy
 				koordlist = []
 
-				while not ergebnisgefunden:
+				while len(ergebnisgefunden) <= 2:
 					#newy2 = None
 					#newx2 = None
 					#newx1 = None
 					#newy1 = None
-
+					
 					if (searchy, searchx) not in koordlist:
 						koordlist.append((searchy, searchx))
-
+					
 					for char in ["X", "^", ">", "v", "<", "|", "_"]: #Ende der Suche: Weichen, Start, Ziel
 						newy1, newx1 = game.lokomotive.char_which_direction(searchy, searchx, char)
 						if newy1 and newx1:
-							return True
+							ergebnisgefunden.append(True)
 							#newy2 = newy1
 							#newx2 = newx2
 					#if newy2 and newx2:
 					#	print str(searchx)+str(searchy)
 					#	return True
-
+					
 					newy1, newx1 = game.lokomotive.char_which_direction(searchy, searchx, "#")
 					if newy1 and newx1:
 						if (newy1, newx1) not in koordlist:
 							#print str(searchx)+str(searchy)
 							searchx = newx1
 							searchy = newy1
-
+							
 							continue
 						else:
 							pass #print ("Schon gewesen: {} {}".format(newy1, newx1))
-
+					
 					for char in game.lokomotive.chars:
 						newy1, newx1 = game.lokomotive.char_which_direction(searchy, searchx, char)
 						if newy1 and newx1:
-							return True
+							ergebnisgefunden.append(False)
 							#newy2 = newy1
 							#newx2 = newx2
 							#break
 					#if newy2 and newx2:
 					#	return False
-
+				return not(False in ergebnisgefunden)
+			
 			if suche(randy, randx):
 				# Wenn eins gefunden wurde,
 				# hoert die schleife auf und keeprunning wird false
