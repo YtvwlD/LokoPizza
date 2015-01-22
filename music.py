@@ -8,7 +8,7 @@ class Music(Thread):
 		self.what = what
 		Thread.__init__(self)
 		self.scheduled = None
-		self.pa = Popen(["pacat", "--latency-msec=1000", "--volume=60000", "--client=LokoPizza"], stdin=PIPE, stdout=None, stderr=None)
+		self.pa = Popen(["pacat", "--latency-msec=1000", "--client=LokoPizza"], stdin=PIPE, stdout=None, stderr=None)
 	
 	def run(self):
 		if self.what != "None":
