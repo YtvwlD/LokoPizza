@@ -7,8 +7,8 @@ from music import Music
 
 
 class LokoPizza:
-	def __init__(self, sound="None"):
-		self.music = Music(sound)
+	def __init__(self, sound="None", soundout="pulse"):
+		self.music = Music(sound, soundout)
 		self.screen = curses.initscr()
 		self.screen.clear()
 		self.screen.refresh()
@@ -43,5 +43,6 @@ class LokoPizza:
 if __name__ == "__main__":
 	argparse = ArgumentParser()
 	argparse.add_argument("sound", help="which sounds to make (can be: \"None\", \"bgm\", \"train\" or \"NootNoot\")")
+	argparse.add_argument("--soundout", help="how to output the sound (can be: \"pulse\" or \"alsa\")", default="pulse")
 	args = argparse.parse_args()
-	lokopizza = LokoPizza(sound=args.sound)
+	lokopizza = LokoPizza(sound=args.sound, soundout=args.soundout)

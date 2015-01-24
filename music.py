@@ -4,13 +4,16 @@ from audioop import add
 from subprocess import Popen, PIPE
 
 class Music(Thread):
-	def __init__(self, what):
+	def __init__(self, what, soundout):
 		self.what = what
 		Thread.__init__(self)
 		if self.what == "None":
 			return
 		self.scheduled = None
-		self.pa = Popen(["pacat", "--latency-msec=1000", "--client=LokoPizza"], stdin=PIPE, stdout=None, stderr=None)
+		if soundout == "pulse":
+			self.soundout = Popen(["pacat", "--latency-msec=1000", "--client=LokoPizza"], stdin=PIPE, stdout=None, stderr=None)
+		elif soundout == "alsa":
+			self.soundout = Popen(["aplay", "-t", "wav", "-f", "cd", "-"], stdin=PIPE, stdout=None, stderr=None)
 	
 	def run(self):
 		if self.what != "None":
@@ -20,7 +23,7 @@ class Music(Thread):
 			while(self.keeprunning):
 				if len(reses) >= 128: #TODO
 					#Abspielen
-					self.pa.stdin.write("".join(reses))
+					self.soundout.stdin.write("".join(reses))
 					reses = []
 				if self.scheduled and self.what != "bgm":
 					scheduled = self.scheduled
