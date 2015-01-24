@@ -1,17 +1,14 @@
 #!/usr/bin/env python
 import curses
 import sys
+from argparse import ArgumentParser
 from game import Game
 from music import Music
 
 
 class LokoPizza:
-	def __init__(self):
-		if len(sys.argv) != 2:
-			print ("Please select the music to play via sys.arvg[1].")
-			print ("None, bgm, train or NootNoot.")
-			sys.exit(1)
-		self.music = Music(sys.argv[1])
+	def __init__(self, sound="None"):
+		self.music = Music(sound)
 		self.screen = curses.initscr()
 		self.screen.clear()
 		self.screen.refresh()
@@ -44,4 +41,7 @@ class LokoPizza:
 		sys.exit(0)
 
 if __name__ == "__main__":
-	lokopizza = LokoPizza()
+	argparse = ArgumentParser()
+	argparse.add_argument("sound", help="which sounds to make (can be: \"None\", \"bgm\", \"train\" or \"NootNoot\")")
+	args = argparse.parse_args()
+	lokopizza = LokoPizza(sound=args.sound)
