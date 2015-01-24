@@ -3,6 +3,11 @@ from wave import open as waveOpen
 from audioop import add
 from subprocess import Popen, PIPE
 
+try:
+	from subprocess import DEVNULL
+except ImportError: #Python 2.7
+	DEVNULL = None
+
 class Music(Thread):
 	def __init__(self, what, soundout):
 		self.what = what
@@ -11,9 +16,9 @@ class Music(Thread):
 			return
 		self.scheduled = None
 		if soundout == "pulse":
-			self.soundout = Popen(["pacat", "--latency-msec=1000", "--client=LokoPizza"], stdin=PIPE, stdout=None, stderr=None)
+			self.soundout = Popen(["pacat", "--latency-msec=1000", "--client=LokoPizza"], stdin=PIPE, stdout=DEVNULL, stderr=DEVNULL)
 		elif soundout == "alsa":
-			self.soundout = Popen(["aplay", "-t", "wav", "-f", "cd", "-"], stdin=PIPE, stdout=None, stderr=None)
+			self.soundout = Popen(["aplay", "-t", "wav", "-f", "cd", "-"], stdin=PIPE, stdout=DEVNULL, stderr=DEVNULL)
 	
 	def run(self):
 		if self.what != "None":

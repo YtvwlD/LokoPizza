@@ -2,6 +2,7 @@
 import curses
 import sys
 from argparse import ArgumentParser
+from time import sleep
 from game import Game
 from music import Music
 
@@ -9,6 +10,7 @@ from music import Music
 class LokoPizza:
 	def __init__(self, sound="None", soundout="pulse"):
 		self.music = Music(sound, soundout)
+		sleep(0.25)
 		self.screen = curses.initscr()
 		self.screen.clear()
 		self.screen.refresh()
