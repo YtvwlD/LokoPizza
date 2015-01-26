@@ -6,7 +6,7 @@ from subprocess import Popen, PIPE
 try:
 	from subprocess import DEVNULL
 except ImportError: #Python 2.7
-	DEVNULL = None
+	DEVNULL = open("/dev/null")
 
 class Music(Thread):
 	def __init__(self, what, soundout):
