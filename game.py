@@ -72,7 +72,7 @@ class Game:
 				weiche = int(res)
 				for y in range(25):
 					for x in range(80):
-						if str(weiche) == self.lokopizza.screen.instr(y,x,1):
+						if self.lokopizza.by(str(weiche)) == self.lokopizza.screen.instr(y,x,1):
 							self.lokopizza.screen.addstr(y, x, str(weiche),  curses.A_REVERSE)
 							self.lokopizza.screen.addstr(y+1, x+1, self.lokopizza.screen.instr(y+1, x+1, 1),  curses.A_REVERSE)
 							while (True):
@@ -80,19 +80,19 @@ class Game:
 								if richtung not in [-1, 27, 91]: #kein Zeichen, ESC, [
 									break
 							if richtung == 65: #curses.KEY_UP
-								pfeil = "^"
+								pfeil = b"^"
 							elif richtung == 67: #curses.KEY_RIGHT
-								pfeil = ">"
+								pfeil = b">"
 							elif richtung == 66: #curses.KEY_DOWN
-								pfeil = "v"
+								pfeil = b"v"
 							elif richtung == 68: #curses.KEY_LEFT
-								pfeil = "<"
+								pfeil = b"<"
 							else:
 								self.lokopizza.screen.addstr(y, x, str(weiche),  curses.A_NORMAL)
 								self.lokopizza.screen.addstr(y+1, x+1, self.lokopizza.screen.instr(y+1, x+1, 1),  curses.A_NORMAL)
 								return
 
-							if self.lokopizza.screen.instr(y+1, x+1, 1) in ["X", "^", ">", "v", "<"]:
+							if self.lokopizza.screen.instr(y+1, x+1, 1) in [b"X", b"^", b">", b"v", b"<"]:
 								self.lokopizza.screen.addstr(y+1, x+1, pfeil, curses.A_NORMAL)
 							else:
 								self.animations.append(specialfx.explosion(y+1, x+1, self))

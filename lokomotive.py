@@ -11,34 +11,34 @@ class Lokomotive:
 			self.oldchars.append([])
 			for x in range(80):
 				self.oldchars[y].append(None)
-				if self.screen.instr(y,x,1) == "|": #start
+				if self.screen.instr(y,x,2) == b"|#": #start
 					self.x = x
 					self.y = y
 	
 	def move(self):
 		rail = False
 		#Behandlung der Weichen:
-		if self.oldchars[self.y][self.x] == "^":
-			if self.screen.instr(self.y-1, self.x, 1) == "#": #oben
+		if self.oldchars[self.y][self.x] == b"^":
+			if self.screen.instr(self.y-1, self.x, 1) == b"#": #oben
 				rail = True
 				self.y -= 1
-		elif self.oldchars[self.y][self.x] == "<":
-			if self.screen.instr(self.y, self.x-1, 1) == "#": #links
+		elif self.oldchars[self.y][self.x] == b"<":
+			if self.screen.instr(self.y, self.x-1, 1) == b"#": #links
 				rail = True
 				self.x -= 1
-		elif self.oldchars[self.y][self.x] == "v":
-			if self.screen.instr(self.y+1, self.x, 1) == "#": #unten
+		elif self.oldchars[self.y][self.x] == b"v":
+			if self.screen.instr(self.y+1, self.x, 1) == b"#": #unten
 				rail = True
 				self.y += 1
-		elif self.oldchars[self.y][self.x] == ">":
-			if self.screen.instr(self.y, self.x+1, 1) == "#": #rechts
+		elif self.oldchars[self.y][self.x] == b">":
+			if self.screen.instr(self.y, self.x+1, 1) == b"#": #rechts
 				rail = True
 				self.x += 1
-		elif (None, None) != self.char_which_direction(self.y, self.x, "_"):
+		elif (None, None) != self.char_which_direction(self.y, self.x, b"_"):
 			self.game.lokopizza.nextLevel()
 		#normale Schienen - oder der Start
 		else:
-			for char in ["#", "^", ">", "v", "<"]:
+			for char in [b"#", b"^", b">", b"v", b"<"]:
 				newy, newx = self.char_which_direction(self.y, self.x, char)
 				if newy and newx: #Schienen in der Naehe
 					rail = True
@@ -70,7 +70,7 @@ class Lokomotive:
 		self.chars = chars
 		
 		def recursion(y, x, charidx):
-			newy, newx = self.char_which_direction(y, x, chars[-charidx])
+			newy, newx = self.char_which_direction(y, x, self.game.lokopizza.by(chars[-charidx]))
 			if newy and newx:
 				try:
 					self.screen.addstr(newy, newx, chars[-charidx-1])

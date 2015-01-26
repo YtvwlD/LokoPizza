@@ -28,7 +28,7 @@ class Music(Thread):
 			while(self.keeprunning):
 				if len(reses) >= 128: #TODO
 					#Abspielen
-					self.soundout.stdin.write("".join(reses))
+					self.soundout.stdin.write(b"".join(reses))
 					reses = []
 				if self.scheduled and self.what != "bgm":
 					scheduled = self.scheduled

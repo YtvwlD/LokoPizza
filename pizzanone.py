@@ -18,7 +18,7 @@ def pizzanone(game):
 		randx = random.randint(0, 78)
 
 		# Suche nach Koordinaten, wo randy und randx eine # sind
-		if screen.instr(randy, randx, 1) == "#":
+		if screen.instr(randy, randx, 1) == b"#":
 			screen.move(24, 30)
 			def suche(newy, newx):
 				ergebnisgefunden = []
@@ -35,8 +35,8 @@ def pizzanone(game):
 					if (searchy, searchx) not in koordlist:
 						koordlist.append((searchy, searchx))
 					
-					for char in ["X", "^", ">", "v", "<", "|", "_"]: #Ende der Suche: Weichen, Start, Ziel
-						newy1, newx1 = game.lokomotive.char_which_direction(searchy, searchx, char)
+					for char in [b"X", b"^", b">", b"v", b"<", b"|", b"_"]: #Ende der Suche: Weichen, Start, Ziel
+						newy1, newx1 = game.lokomotive.char_which_direction(searchy, searchx, game.lokopizza.by(char))
 						if newy1 and newx1:
 							ergebnisgefunden.append(True)
 							#newy2 = newy1
@@ -45,7 +45,7 @@ def pizzanone(game):
 					#	print str(searchx)+str(searchy)
 					#	return True
 					
-					newy1, newx1 = game.lokomotive.char_which_direction(searchy, searchx, "#")
+					newy1, newx1 = game.lokomotive.char_which_direction(searchy, searchx, b"#")
 					if newy1 and newx1:
 						if (newy1, newx1) not in koordlist:
 							#print str(searchx)+str(searchy)
@@ -57,7 +57,7 @@ def pizzanone(game):
 							pass #print ("Schon gewesen: {} {}".format(newy1, newx1))
 					
 					for char in game.lokomotive.chars:
-						newy1, newx1 = game.lokomotive.char_which_direction(searchy, searchx, char)
+						newy1, newx1 = game.lokomotive.char_which_direction(searchy, searchx, game.lokopizza.by(char))
 						if newy1 and newx1:
 							ergebnisgefunden.append(False)
 							#newy2 = newy1

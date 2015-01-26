@@ -41,6 +41,13 @@ class LokoPizza:
 		self.music.keeprunning = False
 		curses.endwin()
 		sys.exit(0)
+	
+	def by(self, string):
+		#Noetig, um Python 2.7 und 3 zu unterstuetzen
+		try:
+			return bytes(string, encoding="utf-8")
+		except TypeError: #Python 2.7
+			return string
 
 if __name__ == "__main__":
 	argparse = ArgumentParser()
