@@ -54,4 +54,8 @@ if __name__ == "__main__":
 	argparse.add_argument("sound", help="which sounds to make (can be: \"None\", \"bgm\", \"train\" or \"NootNoot\")")
 	argparse.add_argument("--soundout", help="how to output the sound (can be: \"pulse\" or \"alsa\")", default="pulse")
 	args = argparse.parse_args()
-	lokopizza = LokoPizza(sound=args.sound, soundout=args.soundout)
+	try:
+		lokopizza = LokoPizza(sound=args.sound, soundout=args.soundout)
+	except Exception:
+		curses.endwin()
+		raise
